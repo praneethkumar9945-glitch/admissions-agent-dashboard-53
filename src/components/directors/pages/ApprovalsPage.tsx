@@ -13,10 +13,10 @@ type SortKey = "date" | "title" | "priority";
 export default function ApprovalsPage() {
   const { approvals, decideApproval, bulkApprove, toast, addNotification } = useApp()
   const { search: query, clear: clearQuery } = useDirectorQuery()
-  const [q, setQ] = useState(""); const [cat, setCat] = useState("All"); const [dept, setDept] = useState("All"); const [status, setStatus] = useState(query.status || "All"); const [prio, setPrio] = useState("All"); const [from, setFrom] = useState(""); const [to, setTo] = useState("")
+  const [q, setQ] = useState(""); const [cat, setCat] = useState("All"); const [dept, setDept] = useState("All"); const [status, setStatus] = useState(query["status"] || "All"); const [prio, setPrio] = useState("All"); const [from, setFrom] = useState(""); const [to, setTo] = useState("")
   const [sort, setSort] = useState<SortKey>("date"); const [page, setPage] = useState(1); const [size, setSize] = useState(10)
   const [selected, setSelected] = useState<string[]>([]); const [detail, setDetail] = useState<Approval | null>(null); const [action, setAction] = useState<{ kind: ApprovalStatus; note: string } | null>(null); const [bulkConfirm, setBulkConfirm] = useState(false)
-  useEffect(() => { const open = query.open; if (open) { const a = approvals.find(x => x.id === open); if (a) setDetail(a) } }, [query, approvals])
+  useEffect(() => { const open = query["open"]; if (open) { const a = approvals.find(x => x.id === open); if (a) setDetail(a) } }, [query, approvals])
   const deptName = (id: string) => departments.find(d => d.id === id)?.name || id
   const filtered = useMemo(() => {
     let list = [...approvals]

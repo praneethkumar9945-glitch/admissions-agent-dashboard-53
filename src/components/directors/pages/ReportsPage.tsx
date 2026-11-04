@@ -6,7 +6,7 @@ import { Btn, Card, Field, inputCls } from '../components/ui'
 const CATS = ['Approval Summary Report', 'Task Completion Report', 'Overdue Task Report', 'Department Performance Report', 'Staff Performance Report', 'Academic Performance Report', 'Financial Summary Report', 'Institute Overview Report', 'Activity and Audit Report']
 export default function ReportsPage() {
   const { approvals, tasks, staff, activity } = useApp()
-  const [category, setCategory] = useState(CATS[0]); const [period, setPeriod] = useState('October–November 2026'); const [dept, setDept] = useState('All'); const [metrics, setMetrics] = useState<string[]>(['Counts', 'Completion rates']); const [generated, setGenerated] = useState(false); const [loading, setLoading] = useState(false)
+  const [category, setCategory] = useState(CATS[0] ?? 'Counts'); const [period, setPeriod] = useState('October–November 2026'); const [dept, setDept] = useState('All'); const [metrics, setMetrics] = useState<string[]>(['Counts', 'Completion rates']); const [generated, setGenerated] = useState(false); const [loading, setLoading] = useState(false)
   const rows = useMemo(() => {
     const deptTasks = dept === 'All' ? tasks : tasks.filter(t => t.departmentId === dept)
     const deptApprovals = dept === 'All' ? approvals : approvals.filter(a => a.departmentId === dept)
