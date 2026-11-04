@@ -30,6 +30,17 @@ import { Route as AdmissionFollowUpRouteImport } from './routes/admission.follow
 import { Route as AdmissionFormBuilderRouteImport } from './routes/admission.form-builder'
 import { Route as AdmissionLeadsRouteImport } from './routes/admission.leads'
 import { Route as AgentIdRouteImport } from './routes/agent.$id'
+import { Route as DirectorsIndexRouteImport } from './routes/directors.index'
+import { Route as DirectorsActivityRouteImport } from './routes/directors.activity'
+import { Route as DirectorsApprovalsRouteImport } from './routes/directors.approvals'
+import { Route as DirectorsDepartmentsRouteImport } from './routes/directors.departments'
+import { Route as DirectorsInstituteRouteImport } from './routes/directors.institute'
+import { Route as DirectorsNotificationsRouteImport } from './routes/directors.notifications'
+import { Route as DirectorsPerformanceRouteImport } from './routes/directors.performance'
+import { Route as DirectorsProfileRouteImport } from './routes/directors.profile'
+import { Route as DirectorsReportsRouteImport } from './routes/directors.reports'
+import { Route as DirectorsSettingsRouteImport } from './routes/directors.settings'
+import { Route as DirectorsTasksRouteImport } from './routes/directors.tasks'
 import { Route as AdmissionAgentsIndexRouteImport } from './routes/admission.agents.index'
 import { Route as AdmissionAgentsIdRouteImport } from './routes/admission.agents.$id'
 import { Route as AdmissionApplicationsIdRouteImport } from './routes/admission.applications.$id'
@@ -145,6 +156,61 @@ const AgentIdRoute = AgentIdRouteImport.update({
   path: '/agent/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DirectorsIndexRoute = DirectorsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DirectorsRoute,
+} as any)
+const DirectorsActivityRoute = DirectorsActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
+  getParentRoute: () => DirectorsRoute,
+} as any)
+const DirectorsApprovalsRoute = DirectorsApprovalsRouteImport.update({
+  id: '/approvals',
+  path: '/approvals',
+  getParentRoute: () => DirectorsRoute,
+} as any)
+const DirectorsDepartmentsRoute = DirectorsDepartmentsRouteImport.update({
+  id: '/departments',
+  path: '/departments',
+  getParentRoute: () => DirectorsRoute,
+} as any)
+const DirectorsInstituteRoute = DirectorsInstituteRouteImport.update({
+  id: '/institute',
+  path: '/institute',
+  getParentRoute: () => DirectorsRoute,
+} as any)
+const DirectorsNotificationsRoute = DirectorsNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => DirectorsRoute,
+} as any)
+const DirectorsPerformanceRoute = DirectorsPerformanceRouteImport.update({
+  id: '/performance',
+  path: '/performance',
+  getParentRoute: () => DirectorsRoute,
+} as any)
+const DirectorsProfileRoute = DirectorsProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => DirectorsRoute,
+} as any)
+const DirectorsReportsRoute = DirectorsReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => DirectorsRoute,
+} as any)
+const DirectorsSettingsRoute = DirectorsSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DirectorsRoute,
+} as any)
+const DirectorsTasksRoute = DirectorsTasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
+  getParentRoute: () => DirectorsRoute,
+} as any)
 const AdmissionAgentsIndexRoute = AdmissionAgentsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -202,7 +268,7 @@ export interface FileRoutesByFullPath {
   '/academic': typeof AcademicRoute
   '/admin': typeof AdminRoute
   '/admission': typeof AdmissionRouteWithChildren
-  '/directors': typeof DirectorsRoute
+  '/directors': typeof DirectorsRouteWithChildren
   '/finance': typeof FinanceRoute
   '/hr': typeof HrRoute
   '/marketing': typeof MarketingRoute
@@ -218,7 +284,18 @@ export interface FileRoutesByFullPath {
   '/admission/form-builder': typeof AdmissionFormBuilderRoute
   '/admission/leads': typeof AdmissionLeadsRoute
   '/agent/$id': typeof AgentIdRoute
+  '/directors/activity': typeof DirectorsActivityRoute
+  '/directors/approvals': typeof DirectorsApprovalsRoute
+  '/directors/departments': typeof DirectorsDepartmentsRoute
+  '/directors/institute': typeof DirectorsInstituteRoute
+  '/directors/notifications': typeof DirectorsNotificationsRoute
+  '/directors/performance': typeof DirectorsPerformanceRoute
+  '/directors/profile': typeof DirectorsProfileRoute
+  '/directors/reports': typeof DirectorsReportsRoute
+  '/directors/settings': typeof DirectorsSettingsRoute
+  '/directors/tasks': typeof DirectorsTasksRoute
   '/admission/': typeof AdmissionIndexRoute
+  '/directors/': typeof DirectorsIndexRoute
   '/admission/agents/$id': typeof AdmissionAgentsIdRoute
   '/admission/applications/$id': typeof AdmissionApplicationsIdRoute
   '/admission/call-center/agents': typeof AdmissionCallCenterAgentsRoute
@@ -233,7 +310,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/academic': typeof AcademicRoute
   '/admin': typeof AdminRoute
-  '/directors': typeof DirectorsRoute
   '/finance': typeof FinanceRoute
   '/hr': typeof HrRoute
   '/marketing': typeof MarketingRoute
@@ -247,7 +323,18 @@ export interface FileRoutesByTo {
   '/admission/form-builder': typeof AdmissionFormBuilderRoute
   '/admission/leads': typeof AdmissionLeadsRoute
   '/agent/$id': typeof AgentIdRoute
+  '/directors/activity': typeof DirectorsActivityRoute
+  '/directors/approvals': typeof DirectorsApprovalsRoute
+  '/directors/departments': typeof DirectorsDepartmentsRoute
+  '/directors/institute': typeof DirectorsInstituteRoute
+  '/directors/notifications': typeof DirectorsNotificationsRoute
+  '/directors/performance': typeof DirectorsPerformanceRoute
+  '/directors/profile': typeof DirectorsProfileRoute
+  '/directors/reports': typeof DirectorsReportsRoute
+  '/directors/settings': typeof DirectorsSettingsRoute
+  '/directors/tasks': typeof DirectorsTasksRoute
   '/admission': typeof AdmissionIndexRoute
+  '/directors': typeof DirectorsIndexRoute
   '/admission/agents/$id': typeof AdmissionAgentsIdRoute
   '/admission/applications/$id': typeof AdmissionApplicationsIdRoute
   '/admission/call-center/agents': typeof AdmissionCallCenterAgentsRoute
@@ -264,7 +351,7 @@ export interface FileRoutesById {
   '/academic': typeof AcademicRoute
   '/admin': typeof AdminRoute
   '/admission': typeof AdmissionRouteWithChildren
-  '/directors': typeof DirectorsRoute
+  '/directors': typeof DirectorsRouteWithChildren
   '/finance': typeof FinanceRoute
   '/hr': typeof HrRoute
   '/marketing': typeof MarketingRoute
@@ -280,7 +367,18 @@ export interface FileRoutesById {
   '/admission/form-builder': typeof AdmissionFormBuilderRoute
   '/admission/leads': typeof AdmissionLeadsRoute
   '/agent/$id': typeof AgentIdRoute
+  '/directors/activity': typeof DirectorsActivityRoute
+  '/directors/approvals': typeof DirectorsApprovalsRoute
+  '/directors/departments': typeof DirectorsDepartmentsRoute
+  '/directors/institute': typeof DirectorsInstituteRoute
+  '/directors/notifications': typeof DirectorsNotificationsRoute
+  '/directors/performance': typeof DirectorsPerformanceRoute
+  '/directors/profile': typeof DirectorsProfileRoute
+  '/directors/reports': typeof DirectorsReportsRoute
+  '/directors/settings': typeof DirectorsSettingsRoute
+  '/directors/tasks': typeof DirectorsTasksRoute
   '/admission/': typeof AdmissionIndexRoute
+  '/directors/': typeof DirectorsIndexRoute
   '/admission/agents/$id': typeof AdmissionAgentsIdRoute
   '/admission/applications/$id': typeof AdmissionApplicationsIdRoute
   '/admission/call-center/agents': typeof AdmissionCallCenterAgentsRoute
@@ -314,7 +412,18 @@ export interface FileRouteTypes {
     | '/admission/form-builder'
     | '/admission/leads'
     | '/agent/$id'
+    | '/directors/activity'
+    | '/directors/approvals'
+    | '/directors/departments'
+    | '/directors/institute'
+    | '/directors/notifications'
+    | '/directors/performance'
+    | '/directors/profile'
+    | '/directors/reports'
+    | '/directors/settings'
+    | '/directors/tasks'
     | '/admission/'
+    | '/directors/'
     | '/admission/agents/$id'
     | '/admission/applications/$id'
     | '/admission/call-center/agents'
@@ -329,7 +438,6 @@ export interface FileRouteTypes {
     | '/'
     | '/academic'
     | '/admin'
-    | '/directors'
     | '/finance'
     | '/hr'
     | '/marketing'
@@ -343,7 +451,18 @@ export interface FileRouteTypes {
     | '/admission/form-builder'
     | '/admission/leads'
     | '/agent/$id'
+    | '/directors/activity'
+    | '/directors/approvals'
+    | '/directors/departments'
+    | '/directors/institute'
+    | '/directors/notifications'
+    | '/directors/performance'
+    | '/directors/profile'
+    | '/directors/reports'
+    | '/directors/settings'
+    | '/directors/tasks'
     | '/admission'
+    | '/directors'
     | '/admission/agents/$id'
     | '/admission/applications/$id'
     | '/admission/call-center/agents'
@@ -375,7 +494,18 @@ export interface FileRouteTypes {
     | '/admission/form-builder'
     | '/admission/leads'
     | '/agent/$id'
+    | '/directors/activity'
+    | '/directors/approvals'
+    | '/directors/departments'
+    | '/directors/institute'
+    | '/directors/notifications'
+    | '/directors/performance'
+    | '/directors/profile'
+    | '/directors/reports'
+    | '/directors/settings'
+    | '/directors/tasks'
     | '/admission/'
+    | '/directors/'
     | '/admission/agents/$id'
     | '/admission/applications/$id'
     | '/admission/call-center/agents'
@@ -392,7 +522,7 @@ export interface RootRouteChildren {
   AcademicRoute: typeof AcademicRoute
   AdminRoute: typeof AdminRoute
   AdmissionRoute: typeof AdmissionRouteWithChildren
-  DirectorsRoute: typeof DirectorsRoute
+  DirectorsRoute: typeof DirectorsRouteWithChildren
   FinanceRoute: typeof FinanceRoute
   HrRoute: typeof HrRoute
   MarketingRoute: typeof MarketingRoute
@@ -550,6 +680,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgentIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/directors/': {
+      id: '/directors/'
+      path: '/'
+      fullPath: '/directors/'
+      preLoaderRoute: typeof DirectorsIndexRouteImport
+      parentRoute: typeof DirectorsRoute
+    }
+    '/directors/activity': {
+      id: '/directors/activity'
+      path: '/activity'
+      fullPath: '/directors/activity'
+      preLoaderRoute: typeof DirectorsActivityRouteImport
+      parentRoute: typeof DirectorsRoute
+    }
+    '/directors/approvals': {
+      id: '/directors/approvals'
+      path: '/approvals'
+      fullPath: '/directors/approvals'
+      preLoaderRoute: typeof DirectorsApprovalsRouteImport
+      parentRoute: typeof DirectorsRoute
+    }
+    '/directors/departments': {
+      id: '/directors/departments'
+      path: '/departments'
+      fullPath: '/directors/departments'
+      preLoaderRoute: typeof DirectorsDepartmentsRouteImport
+      parentRoute: typeof DirectorsRoute
+    }
+    '/directors/institute': {
+      id: '/directors/institute'
+      path: '/institute'
+      fullPath: '/directors/institute'
+      preLoaderRoute: typeof DirectorsInstituteRouteImport
+      parentRoute: typeof DirectorsRoute
+    }
+    '/directors/notifications': {
+      id: '/directors/notifications'
+      path: '/notifications'
+      fullPath: '/directors/notifications'
+      preLoaderRoute: typeof DirectorsNotificationsRouteImport
+      parentRoute: typeof DirectorsRoute
+    }
+    '/directors/performance': {
+      id: '/directors/performance'
+      path: '/performance'
+      fullPath: '/directors/performance'
+      preLoaderRoute: typeof DirectorsPerformanceRouteImport
+      parentRoute: typeof DirectorsRoute
+    }
+    '/directors/profile': {
+      id: '/directors/profile'
+      path: '/profile'
+      fullPath: '/directors/profile'
+      preLoaderRoute: typeof DirectorsProfileRouteImport
+      parentRoute: typeof DirectorsRoute
+    }
+    '/directors/reports': {
+      id: '/directors/reports'
+      path: '/reports'
+      fullPath: '/directors/reports'
+      preLoaderRoute: typeof DirectorsReportsRouteImport
+      parentRoute: typeof DirectorsRoute
+    }
+    '/directors/settings': {
+      id: '/directors/settings'
+      path: '/settings'
+      fullPath: '/directors/settings'
+      preLoaderRoute: typeof DirectorsSettingsRouteImport
+      parentRoute: typeof DirectorsRoute
+    }
+    '/directors/tasks': {
+      id: '/directors/tasks'
+      path: '/tasks'
+      fullPath: '/directors/tasks'
+      preLoaderRoute: typeof DirectorsTasksRouteImport
+      parentRoute: typeof DirectorsRoute
+    }
     '/admission/agents/': {
       id: '/admission/agents/'
       path: '/'
@@ -694,12 +901,44 @@ const AdmissionRouteWithChildren = AdmissionRoute._addFileChildren(
   AdmissionRouteChildren,
 )
 
+interface DirectorsRouteChildren {
+  DirectorsActivityRoute: typeof DirectorsActivityRoute
+  DirectorsApprovalsRoute: typeof DirectorsApprovalsRoute
+  DirectorsDepartmentsRoute: typeof DirectorsDepartmentsRoute
+  DirectorsInstituteRoute: typeof DirectorsInstituteRoute
+  DirectorsNotificationsRoute: typeof DirectorsNotificationsRoute
+  DirectorsPerformanceRoute: typeof DirectorsPerformanceRoute
+  DirectorsProfileRoute: typeof DirectorsProfileRoute
+  DirectorsReportsRoute: typeof DirectorsReportsRoute
+  DirectorsSettingsRoute: typeof DirectorsSettingsRoute
+  DirectorsTasksRoute: typeof DirectorsTasksRoute
+  DirectorsIndexRoute: typeof DirectorsIndexRoute
+}
+
+const DirectorsRouteChildren: DirectorsRouteChildren = {
+  DirectorsActivityRoute: DirectorsActivityRoute,
+  DirectorsApprovalsRoute: DirectorsApprovalsRoute,
+  DirectorsDepartmentsRoute: DirectorsDepartmentsRoute,
+  DirectorsInstituteRoute: DirectorsInstituteRoute,
+  DirectorsNotificationsRoute: DirectorsNotificationsRoute,
+  DirectorsPerformanceRoute: DirectorsPerformanceRoute,
+  DirectorsProfileRoute: DirectorsProfileRoute,
+  DirectorsReportsRoute: DirectorsReportsRoute,
+  DirectorsSettingsRoute: DirectorsSettingsRoute,
+  DirectorsTasksRoute: DirectorsTasksRoute,
+  DirectorsIndexRoute: DirectorsIndexRoute,
+}
+
+const DirectorsRouteWithChildren = DirectorsRoute._addFileChildren(
+  DirectorsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AcademicRoute: AcademicRoute,
   AdminRoute: AdminRoute,
   AdmissionRoute: AdmissionRouteWithChildren,
-  DirectorsRoute: DirectorsRoute,
+  DirectorsRoute: DirectorsRouteWithChildren,
   FinanceRoute: FinanceRoute,
   HrRoute: HrRoute,
   MarketingRoute: MarketingRoute,
