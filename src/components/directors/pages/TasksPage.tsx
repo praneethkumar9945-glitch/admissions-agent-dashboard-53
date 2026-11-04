@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useDirectorQuery } from '../links'
 import {
   AlertTriangle, CalendarDays, CheckCircle2, ChevronLeft, ChevronRight,
   Clock3, LayoutGrid, List, Plus, SlidersHorizontal, Trash2,
@@ -20,7 +20,8 @@ const blankForm = (dept = 'D01'): FormState => {
 }
 export default function TasksPage() {
   const { tasks, upsertTask, updateTask, deleteTask, toast, addNotification } = useApp()
-  const [params, setParams] = useSearchParams()
+  const { search, clear: clearParams } = useDirectorQuery()
+  const params = { get: (key: string) => search[key] ?? null }
   const [view, setView] = useState<'table' | 'kanban' | 'calendar'>('calendar')
   const [q, setQ] = useState(''); const [dept, setDept] = useState('All'); const [resp, setResp] = useState(params.get('resp') || 'All'); const [prio, setPrio] = useState('All'); const [status, setStatus] = useState(params.get('status') || 'All'); const [overdueOnly, setOverdueOnly] = useState(params.get('overdue') === '1')
   const [page, setPage] = useState(1); const [size] = useState(10)
@@ -71,7 +72,7 @@ export default function TasksPage() {
     setFormErrors(errs); if (Object.keys(errs).length) return
     const base = (editing || { id: `TSK-${211 + tasks.length}`, status: 'Not Started', progress: 0, attachments: ['Checklist (demo).pdf'], comments: [], createdAt: dateKey(new Date()) }) as Task
     const saved: Task = { ...base, title: form.title.trim(), category: form.category, departmentId: form.departmentId, responsibleId: form.responsibleId, teamIds: form.teamIds, priority: form.priority, startDate: form.startDate, dueDate: form.dueDate, outcome: form.outcome, description: form.description, instructions: form.instructions, subtasks: form.subtasks.filter(Boolean).map((title, i) => ({ id: `${base.id}-${i}`, title, done: editing?.subtasks[i]?.done || false })), milestones: form.milestones.filter(Boolean), dependencies: form.dependencies, notes: form.notes, blockedReason: form.blockedReason || undefined }
-    upsertTask(saved); toast('success', editing ? 'Task updated.' : 'Task created and assigned.'); setFormOpen(false); setDetail(saved); setParams({})
+    upsertTask(saved); toast('success', editing ? 'Task updated.' : 'Task created and assigned.'); setFormOpen(false); setDetail(saved); clearParams()
     if (!editing) addNotification({ title: 'Task assigned', description: `${saved.title} assigned to ${staffName(saved.responsibleId)}.`, date: new Date().toISOString(), category: 'Task', link: '/tasks', recordId: saved.id })
   }
   const move = (t: Task, next: TaskStatus, note?: string) => {
@@ -192,7 +193,7 @@ export default function TasksPage() {
       </Modal>
       <Confirm open={!!confirmDelete} onClose={() => setConfirmDelete(null)} title="Cancel this task?" text="This removes the task from the demo dataset. This cannot be undone in this demo." confirmLabel="Cancel task" onConfirm={() => { if (confirmDelete) { deleteTask(confirmDelete.id); toast('success', 'Task cancelled.'); setDetail(null) } }} />
       <Confirm open={!!confirmComplete} onClose={() => setConfirmComplete(null)} title="Mark task as completed?" text="Completed tasks are no longer counted as overdue. Confirm that the work and evidence have been reviewed." confirmLabel="Mark completed" onConfirm={() => { if (confirmComplete) { updateTask(confirmComplete.id, { status: 'Completed', progress: 100 }); toast('success', 'Task completed.'); setDetail(null) } }} />
-      <Modal open={formOpen} onClose={() => { setFormOpen(false); setParams({}) }} title={editing ? 'Edit task' : 'Create task'} wide>
+      <Modal open={formOpen} onClose={() => { setFormOpen(false); clearParams() }} title={editing ? 'Edit task' : 'Create task'} wide>
         <div className="grid gap-4 sm:grid-cols-2 text-sm">
           <div className="sm:col-span-2"><Field label="Task title *" error={formErrors.title}><input value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} className={inputCls} placeholder="e.g. Finalise the December examination timetable" /></Field></div>
           <Field label="Detailed description"><textarea value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} className={inputCls} rows={3} /></Field>
@@ -210,7 +211,7 @@ export default function TasksPage() {
           <Field label="Additional notes"><textarea value={form.notes} onChange={e => setForm({ ...form, notes: e.target.value })} className={inputCls} rows={2} /></Field>
           <div className="sm:col-span-2 rounded-xl bg-slate-50 p-3 text-xs text-slate-500 dark:bg-slate-800">Supporting attachments are represented as demo files in this frontend build. Dependencies are tracked as free text in the task notes for this demo.</div>
         </div>
-        <div className="mt-5 flex justify-end gap-2"><Btn variant="secondary" onClick={() => { setFormOpen(false); setParams({}) }}>Cancel</Btn><Btn onClick={submitForm}>{editing ? 'Save changes' : 'Create Task'}</Btn></div>
+        <div className="mt-5 flex justify-end gap-2"><Btn variant="secondary" onClick={() => { setFormOpen(false); clearParams() }}>Cancel</Btn><Btn onClick={submitForm}>{editing ? 'Save changes' : 'Create Task'}</Btn></div>
       </Modal>
     </div>
   )

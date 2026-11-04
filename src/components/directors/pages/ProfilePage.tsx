@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "@tanstack/react-router"
 import { useApp } from '../store/AppContext'
 import { Btn, Card, Field, inputCls } from '../components/ui'
 export default function ProfilePage() {
@@ -13,7 +13,7 @@ export default function ProfilePage() {
           <Field label="Email"><input value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} className={inputCls} type="email" /></Field>
           <Field label="Phone (demo)"><input value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} className={inputCls} /></Field>
           <div className="sm:col-span-2"><Field label="Office"><input value={form.office} onChange={e => setForm({ ...form, office: e.target.value })} className={inputCls} /></Field></div>
-          <div className="flex flex-wrap gap-2 sm:col-span-2"><Btn type="submit">Save profile</Btn><Btn variant="secondary" onClick={() => nav('/settings')}>Appearance settings</Btn></div>
+          <div className="flex flex-wrap gap-2 sm:col-span-2"><Btn type="submit">Save profile</Btn><Btn variant="secondary" onClick={() => nav({ to: '/directors/settings' })}>Appearance settings</Btn></div>
         </form>
         <p className="mt-4 text-xs text-slate-500">Sample profile data, editable locally. This is not connected to any directory or authentication server.</p></Card>
     </div>
